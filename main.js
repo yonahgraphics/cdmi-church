@@ -344,15 +344,28 @@
     const float = $("#eventFloat"), img = $("img", float);
     const xTo = gsap.quickTo(float, "x", { duration: 0.6, ease: "power3" });
     const yTo = gsap.quickTo(float, "y", { duration: 0.6, ease: "power3" });
-    const list = $("#eventList");
-    list.addEventListener("mousemove", (e) => { xTo(e.clientX + 30); yTo(e.clientY - 120); });
-    list.addEventListener("mouseover", (e) => {
-      const b = e.target.closest("button[data-img]");
-      if (!b) return;
-      if (!img.src.endsWith(b.dataset.img)) img.src = b.dataset.img;
-      gsap.to(float, { opacity: 1, scale: 1, rotation: gsap.utils.random(-6, 6), duration: 0.5, ease: "expo.out" });
-    });
-    list.addEventListener("mouseleave", () => gsap.to(float, { opacity: 0, scale: 0.6, duration: 0.4, ease: "power3" }));
+    // Decide visibility from what is actually under the pointer. Checking on scroll too matters:
+    // scrolling moves the list out from under a still cursor without firing any mouse event.
+    let px = -1, py = -1, current = null;
+    const update = () => {
+      const el = px < 0 ? null : document.elementFromPoint(px, py);
+      const b = el && !drawer.hidden ? null : el && el.closest("#eventList button[data-img]");
+      if (b === current) return;
+      current = b;
+      if (b) {
+        if (!img.src.endsWith(b.dataset.img)) img.src = b.dataset.img;
+        gsap.to(float, { opacity: 1, scale: 1, rotation: gsap.utils.random(-6, 6), duration: 0.5, ease: "expo.out", overwrite: "auto" });
+      } else {
+        gsap.to(float, { opacity: 0, scale: 0.6, duration: 0.35, ease: "power3", overwrite: "auto" });
+      }
+    };
+    window.addEventListener("mousemove", (e) => {
+      px = e.clientX; py = e.clientY;
+      xTo(px + 30); yTo(py - 120);
+      update();
+    }, { passive: true });
+    window.addEventListener("scroll", update, { passive: true });
+    document.documentElement.addEventListener("mouseleave", () => { px = py = -1; update(); });
   }
 
   /* ---------------- Particle morph (disintegrate / integrate) ---------------- */
