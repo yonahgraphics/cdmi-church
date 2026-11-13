@@ -142,9 +142,10 @@
     if (!btn) return;
     if (btn.dataset.close === "announce") hideAnnounce();
     if (btn.dataset.close === "jubilee") closeJubilee();
+    if (btn.dataset.close === "drawer") closeDrawer();
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { closeJubilee(); closeMenu(); }
+    if (e.key === "Escape") { closeDrawer(); closeJubilee(); closeMenu(); }
   });
 
   function confetti() {
@@ -244,7 +245,114 @@
     const xTo = gsap.quickTo(cur, "x", { duration: 0.25, ease: "power3" });
     const yTo = gsap.quickTo(cur, "y", { duration: 0.25, ease: "power3" });
     window.addEventListener("mousemove", (e) => { xTo(e.clientX); yTo(e.clientY); });
-    document.addEventListener("mouseover", (e) => cur.classList.toggle("is-hover", !!e.target.closest("a, button, .mcard, .sermon")));
+    document.addEventListener("mouseover", (e) => cur.classList.toggle("is-hover", !!e.target.closest("a, button, .mcard, .sermon, .event")));
+  }
+
+  /* ---------------- Departments, events and the detail drawer ---------------- */
+  const DEPTS = window.CDMI_DEPARTMENTS || [];
+  const EVENTS = window.CDMI_EVENTS || [];
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const num = (i) => String(i + 1).padStart(2, "0");
+
+  function renderDepartments() {
+    const track = $("#minTrack");
+    if (!track) return;
+    track.innerHTML = DEPTS.map((d, i) => `
+      <article class="mcard" role="button" tabindex="0" data-dept="${d.id}" aria-label="Explore ${esc(d.name)}">
+        <div class="mcard__img"><img src="${d.img}" alt="" loading="lazy" /></div>
+        <div class="mcard__body">
+          <span class="mcard__num">${num(i)}</span>
+          <h3>${esc(d.name)}</h3>
+          <p class="mcard__tag">${esc(d.tagline)}</p>
+          <div class="mcard__foot">
+            <span class="mcard__more">Explore <i>→</i></span>
+            ${d.programmes.length ? `<span class="mcard__count">${d.programmes.length} programme${d.programmes.length > 1 ? "s" : ""}</span>` : ""}
+          </div>
+        </div>
+      </article>`).join("");
+  }
+
+  function renderEvents() {
+    const list = $("#eventList");
+    if (!list) return;
+    list.innerHTML = EVENTS.map((e, i) => `
+      <li class="event" data-fade>
+        <button data-dept="${e.dept}" data-img="${e.img}">
+          <span class="event__i">${num(i)}</span>
+          <img class="event__thumb" src="${e.img}" alt="" loading="lazy" />
+          <span class="event__name">${esc(e.name)}<small>${esc(e.by)}</small></span>
+          <span class="event__by">${esc(e.by)}</span>
+          <span class="event__arrow" aria-hidden="true">→</span>
+        </button>
+      </li>`).join("");
+  }
+
+  const drawer = $("#drawer");
+  let drawerIdx = -1, drawerReturn = null;
+  function fillDrawer(i) {
+    const d = DEPTS[i];
+    drawerIdx = i;
+    $("#drawerImg").src = d.img;
+    $("#drawerNum").textContent = `Ministry ${num(i)} of ${DEPTS.length}`;
+    $("#drawerTitle").textContent = d.name;
+    $("#drawerTag").textContent = d.tagline;
+    $("#drawerText").innerHTML = d.text.map((t) => `<p>${esc(t)}</p>`).join("");
+    $("#drawerProgs").innerHTML = d.programmes.length
+      ? `<div class="progs"><h4>Programmes</h4>${d.programmes.map(([n, t]) => `<div class="prog"><b>${esc(n)}</b><p>${esc(t)}</p></div>`).join("")}</div>`
+      : "";
+    $(".drawer__panel").scrollTop = 0;
+    if (hasGsap && !REDUCED) gsap.fromTo(".drawer__body > *", { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.8, ease: "expo.out" });
+  }
+  function openDrawer(id) {
+    const i = DEPTS.findIndex((d) => d.id === id);
+    if (i < 0) return;
+    drawerReturn = document.activeElement;
+    drawer.hidden = false;
+    lenis && lenis.stop();
+    fillDrawer(i);
+    if (hasGsap && !REDUCED) {
+      gsap.fromTo(".drawer__backdrop", { opacity: 0 }, { opacity: 1, duration: 0.5 });
+      gsap.fromTo(".drawer__panel", { xPercent: 100 }, { xPercent: 0, duration: 0.9, ease: "expo.out" });
+      gsap.fromTo("#drawerImg", { scale: 1.3 }, { scale: 1, duration: 1.4, ease: "expo.out" });
+    }
+    $(".close-btn", drawer).focus({ preventScroll: true });
+  }
+  function closeDrawer() {
+    if (!drawer || drawer.hidden) return;
+    const done = () => { drawer.hidden = true; lenis && lenis.start(); drawerReturn && drawerReturn.focus && drawerReturn.focus({ preventScroll: true }); };
+    if (hasGsap && !REDUCED) {
+      gsap.to(".drawer__panel", { xPercent: 100, duration: 0.5, ease: "power3.in" });
+      gsap.to(".drawer__backdrop", { opacity: 0, duration: 0.5, onComplete: done });
+    } else done();
+  }
+  const stepDrawer = (dir) => fillDrawer((drawerIdx + dir + DEPTS.length) % DEPTS.length);
+  $("#drawerPrev").addEventListener("click", () => stepDrawer(-1));
+  $("#drawerNext").addEventListener("click", () => stepDrawer(1));
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-dept]");
+    if (t) openDrawer(t.dataset.dept);
+  });
+  document.addEventListener("keydown", (e) => {
+    const t = e.target.closest && e.target.closest(".mcard[data-dept]");
+    if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openDrawer(t.dataset.dept); }
+    if (!drawer.hidden && e.key === "ArrowRight") stepDrawer(1);
+    if (!drawer.hidden && e.key === "ArrowLeft") stepDrawer(-1);
+  });
+
+  function eventHover() {
+    if (!FINE_POINTER || REDUCED || !hasGsap) return;
+    const float = $("#eventFloat"), img = $("img", float);
+    const xTo = gsap.quickTo(float, "x", { duration: 0.6, ease: "power3" });
+    const yTo = gsap.quickTo(float, "y", { duration: 0.6, ease: "power3" });
+    const list = $("#eventList");
+    list.addEventListener("mousemove", (e) => { xTo(e.clientX + 30); yTo(e.clientY - 120); });
+    list.addEventListener("mouseover", (e) => {
+      const b = e.target.closest("button[data-img]");
+      if (!b) return;
+      if (!img.src.endsWith(b.dataset.img)) img.src = b.dataset.img;
+      gsap.to(float, { opacity: 1, scale: 1, rotation: gsap.utils.random(-6, 6), duration: 0.5, ease: "expo.out" });
+    });
+    list.addEventListener("mouseleave", () => gsap.to(float, { opacity: 0, scale: 0.6, duration: 0.4, ease: "power3" }));
   }
 
   /* ---------------- Particle morph (disintegrate / integrate) ---------------- */
@@ -255,7 +363,7 @@
     const ctx = canvas.getContext("2d");
     const caps = $$("[data-cap]");
     const bar = $("#morphBar");
-    const PHRASES = [["TEACHING THE", "WHOLE TRUTH"], ["DELIVERING", "THE CAPTIVES"], ["MAKING", "DISCIPLES"]];
+    const PHRASES = [["TEACHING THE", "WHOLE TRUTH"], ["DELIVERING", "THE CAPTIVES"], ["MAKING", "DISCIPLES"], ["GO INTO ALL", "THE WORLD"]];
     const COLORS = ["#ffffff", "#f4c04e", "#2ad1c9"];
     let W = 0, H = 0, dpr = 1, N = 0;
     let keys = [];        // keyframes: [cloud, phrase0, phrase1, phrase2, burst]; each {x:Float32Array, y, z}
@@ -386,7 +494,7 @@
     function start() {
       const go = () => {
         build();
-        if (REDUCED) { s = 3; draw(0); return; }
+        if (REDUCED) { s = PHRASES.length; draw(0); return; }
         new IntersectionObserver(([e]) => {
           visible = e.isIntersecting;
           if (visible && !running) { running = true; requestAnimationFrame(frame); }
@@ -483,7 +591,19 @@
       });
     });
     mm.add("(max-width: 760px)", () => {
-      $$(".mcard").forEach((card) => gsap.from(card, { y: 80, rotationX: -20, opacity: 0, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: card, start: "top 88%" } }));
+      gsap.from(".mcard", { x: 120, rotationY: -25, opacity: 0, stagger: 0.08, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: "#minTrack", start: "top 85%" } });
+    });
+
+    // Discipleship School: the path fills as you scroll and each step lights up
+    mm.add("(min-width: 901px)", () => {
+      gsap.to("#pathFill", { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".path", start: "top 75%", end: "bottom 45%", scrub: 1 } });
+    });
+    mm.add("(max-width: 900px)", () => {
+      gsap.to("#pathFill", { scaleY: 1, ease: "none", scrollTrigger: { trigger: ".path", start: "top 70%", end: "bottom 60%", scrub: 1 } });
+    });
+    $$(".step").forEach((st, i) => {
+      ScrollTrigger.create({ trigger: st, start: "top 70%", toggleClass: { targets: st, className: "is-on" } });
+      gsap.from(st, { y: 60, opacity: 0, duration: 1.1, delay: i * 0.12, ease: "expo.out", scrollTrigger: { trigger: ".path", start: "top 80%" } });
     });
 
     // Conference: photo shatters in from 3D space, holds, then disintegrates
@@ -562,6 +682,8 @@
   });
 
   /* ---------------- Boot ---------------- */
+  renderDepartments();
+  renderEvents();
   const heroCharsAll = $$(".hero__title [data-split]").flatMap(splitChars);
   buildTiles();
   let rt;
@@ -574,6 +696,7 @@
     Morph.start();
     heroMouse();
     tilt();
+    eventHover();
     if (!hasGsap || REDUCED) { setTimeout(openJubilee, 900); return; }
     const tl = gsap.timeline();
     tl.fromTo(".hero__bg", { scale: 1.35, filter: "blur(14px)" }, { scale: 1, filter: "blur(0px)", duration: 2.2, ease: "expo.out" }, 0)
