@@ -3,7 +3,7 @@
 Website for Christian Discipleship Ministries International (CDMI), Kololo, Kampala.
 
 A static site with no build step: `index.html`, `styles.css`, `main.js`, and images in `assets/img/`.
-No libraries or build step. Animations use IntersectionObserver and one scroll loop in `main.js`. Ministries, events, sermons and testimonies live in `assets/data.js`, so they can be edited without touching the layout. The previous dark design is saved as the git tag `v1-dark`.
+Animation is done with GSAP + ScrollTrigger and Lenis smooth scroll, loaded from CDNs.
 
 ## Editing
 - **Conference date:** change `CONFERENCE` near the top of `main.js` and the date text in `index.html`.

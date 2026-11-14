@@ -5,370 +5,487 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CDMI Church | Christian Discipleship Ministries International</title>
   <meta name="description" content="Christian Discipleship Ministries International (CDMI), Kololo, Kampala. Teaching the whole truth, delivering the captives, making disciples. Led by Apostle Dr. Michael Kimuli." />
-  <meta name="theme-color" content="#f7f2ea" />
+  <meta name="theme-color" content="#060d22" />
   <meta property="og:title" content="CDMI Church | Celebrating 20 Years" />
   <meta property="og:description" content="Teaching the whole truth. Delivering the captives. Making disciples." />
   <meta property="og:image" content="assets/img/worship.jpg" />
   <link rel="icon" href="assets/img/logo.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
+<body class="is-loading">
 
-  <!-- Conference countdown bar (closeable, returns on reload) -->
-  <div class="announce" id="announce" role="region" aria-label="Prayer Conference countdown">
-    <p><span class="announce__dot" aria-hidden="true"></span><b>Annual Prayer Conference</b> <span class="hide-sm">· 20 Dec 2026 ·</span> <span data-countdown="mini">--d --h --m</span> <a href="#conference">Details</a></p>
-    <button class="x" data-close="announce" aria-label="Close announcement"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <!-- ============ PRELOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <img src="assets/img/logo.jpg" alt="" class="loader__logo" />
+      <div class="loader__count"><span id="loaderCount">0</span>%</div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+    </div>
   </div>
 
-  <!-- 20 years celebration (closeable, returns on reload) -->
+  <!-- ============ ANNOUNCEMENT BAR: conference countdown (closeable) ============ -->
+  <div class="announce" id="announce" role="region" aria-label="Prayer Conference countdown">
+    <div class="announce__inner">
+      <span class="announce__pulse" aria-hidden="true"></span>
+      <strong>Annual Prayer Conference</strong>
+      <span class="announce__sep">·</span>
+      <span>20 Dec 2026</span>
+      <span class="announce__sep">·</span>
+      <span class="announce__count" data-countdown="mini">--d --h --m --s</span>
+      <a href="#conference" class="announce__link">Details →</a>
+    </div>
+    <button class="close-btn" data-close="announce" aria-label="Close announcement">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <!-- ============ 20 YEARS POPUP (closeable) ============ -->
   <div class="jubilee" id="jubilee" role="dialog" aria-modal="true" aria-labelledby="jubileeTitle" hidden>
     <div class="jubilee__backdrop" data-close="jubilee"></div>
     <div class="jubilee__card">
-      <button class="x x--lg" data-close="jubilee" aria-label="Close 20 years celebration"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-      <canvas class="jubilee__confetti" id="confetti" aria-hidden="true"></canvas>
-      <img src="assets/img/20-years.png" alt="Celebrating 20 Years, CDMI" class="jubilee__badge" />
-      <p class="kicker">2006 to 2026</p>
-      <h2 id="jubileeTitle" class="jubilee__title">20 years of <em>faithfulness</em></h2>
-      <p>Two decades of teaching the Word, praying for breakthrough and making disciples. Come celebrate with us.</p>
-      <div class="row">
-        <a href="#anniversary" class="btn btn--accent" data-close="jubilee">Celebrate with us</a>
-        <button class="btn btn--line" data-close="jubilee">Maybe later</button>
+      <button class="close-btn close-btn--lg" data-close="jubilee" aria-label="Close 20 years celebration">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <canvas class="jubilee__confetti" id="confetti"></canvas>
+      <img src="assets/img/20-years.png" alt="Celebrating 20 Years Anniversary, CDMI" class="jubilee__badge" />
+      <p class="eyebrow eyebrow--gold">2006 to 2026</p>
+      <h2 id="jubileeTitle" class="jubilee__title">20 Years of <em>Faithfulness</em></h2>
+      <p class="jubilee__text">Two decades of teaching the Word, praying for breakthrough and making disciples. Come celebrate with us.</p>
+      <div class="jubilee__actions">
+        <a href="#anniversary" class="btn btn--gold" data-close="jubilee">Celebrate with us</a>
+        <button class="btn btn--ghost" data-close="jubilee">Maybe later</button>
       </div>
     </div>
   </div>
 
-  <!-- Ministry detail drawer -->
+  <!-- ============ MINISTRY DETAIL DRAWER ============ -->
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
     <div class="drawer__backdrop" data-close="drawer"></div>
-    <aside class="drawer__panel">
-      <button class="x x--lg" data-close="drawer" aria-label="Close ministry details"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-      <div class="drawer__img"><img alt="" id="drawerImg" /></div>
+    <aside class="drawer__panel" data-lenis-prevent>
+      <button class="close-btn close-btn--lg" data-close="drawer" aria-label="Close ministry details">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="drawer__hero"><img alt="" id="drawerImg" /></div>
       <div class="drawer__body">
-        <p class="kicker" id="drawerNum"></p>
-        <h2 id="drawerTitle"></h2>
-        <p class="drawer__tag" id="drawerTag"></p>
+        <p class="eyebrow" id="drawerNum"></p>
+        <h2 id="drawerTitle" class="drawer__title"></h2>
+        <p class="drawer__tagline" id="drawerTag"></p>
         <div id="drawerText"></div>
         <div id="drawerProgs"></div>
         <div class="drawer__nav">
-          <button class="btn btn--line btn--sm" id="drawerPrev">← Previous</button>
-          <button class="btn btn--line btn--sm" id="drawerNext">Next →</button>
+          <button class="btn btn--ghost btn--small" id="drawerPrev">← Previous</button>
+          <button class="btn btn--ghost btn--small" id="drawerNext">Next →</button>
         </div>
       </div>
     </aside>
   </div>
 
-  <!-- Floating navigation -->
+  <div class="cursor" aria-hidden="true"><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
-    <a href="#top" class="nav__brand" aria-label="CDMI Church home">
-      <img src="assets/img/logo.jpg" alt="" width="36" height="36" />
-      <span>CDMI <small>Church</small></span>
+    <a href="#top" class="nav__brand" aria-label="CDMI home">
+      <img src="assets/img/logo.jpg" alt="" />
+      <span><b>CDMI</b><small>Church · Kololo</small></span>
     </a>
     <nav class="nav__links" aria-label="Main">
-      <a href="#top">Home</a>
-      <a href="#about">About Us</a>
+      <a href="#about">About</a>
       <a href="#ministries">Ministries</a>
-      <a href="#sermons">Sermons</a>
+      <a href="#discipleship">Discipleship</a>
       <a href="#events">Events</a>
-      <a href="#give">Give</a>
-      <a href="#visit">Contact</a>
+      <a href="#sermons">Sermons</a>
+      <a href="#branches">Branches</a>
     </nav>
-    <a href="#visit" class="btn btn--accent btn--sm nav__cta">Plan your visit</a>
-    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+    <a href="#conference" class="btn btn--small btn--gold nav__cta">Prayer Conference</a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
   </header>
-  <div class="menu" id="menu" hidden>
-    <nav aria-label="Mobile">
-      <a href="#top">Home</a><a href="#about">About Us</a><a href="#ministries">Ministries</a><a href="#school">Discipleship School</a>
-      <a href="#sermons">Sermons</a><a href="#events">Events</a><a href="#give">Give</a><a href="#visit">Contact</a>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#ministries">Ministries</a>
+      <a href="#discipleship">Discipleship</a>
+      <a href="#gatherings">Gatherings</a>
+      <a href="#events">Events</a>
+      <a href="#sermons">Sermons</a>
+      <a href="#conference">Prayer Conference</a>
+      <a href="#anniversary">20 Years</a>
+      <a href="#branches">Branches</a>
     </nav>
-    <a href="#visit" class="btn btn--accent">Plan your visit</a>
   </div>
 
-  <main id="main">
-    <span id="top"></span>
+  <main id="top">
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__media"><img src="assets/img/worship.jpg" alt="A congregation worshipping with hands raised" data-parallax="0.18" fetchpriority="high" /></div>
-      <div class="hero__inner wrap">
-        <p class="hero__label"><span>Sundays</span><span>Kololo, Kampala</span><span>Since 2006</span></p>
-        <h1 class="hero__title" data-lines>
-          <span class="ln"><span>Teaching the</span></span>
-          <span class="ln"><span>whole <em>truth.</em></span></span>
-        </h1>
-        <p class="hero__sub" data-in>A Spirit-filled church in the heart of Kampala. Come pray, grow in the Word and find your church family.</p>
-        <div class="row" data-in>
-          <a href="#visit" class="btn btn--accent">Plan your visit</a>
-          <a href="#sermons" class="btn btn--glass"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch our services</a>
+    <!-- ============ HERO: 3D parallax, title disintegrates on scroll ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__stage">
+        <div class="hero__layer hero__bg" data-depth="0.15">
+          <img src="assets/img/worship.jpg" alt="Congregation worshipping with raised hands" />
         </div>
+        <div class="hero__layer hero__glow" data-depth="0.3"></div>
+        <div class="hero__layer hero__rays" data-depth="0.4" aria-hidden="true"></div>
+
+        <div class="hero__content">
+          <p class="eyebrow hero__eyebrow">Christian Discipleship Ministries International</p>
+          <h1 class="hero__title" aria-label="Teaching the whole truth">
+            <span class="split-line" data-split>Teaching the</span>
+            <span class="split-line split-line--serif" data-split>Whole Truth.</span>
+          </h1>
+          <p class="hero__sub">A church in the heart of Kampala. Come pray, grow in the Word and find your church family.</p>
+          <div class="hero__actions">
+            <a href="#gatherings" class="btn btn--light">Plan a visit</a>
+            <a href="https://www.youtube.com/@MichaelKimuli" target="_blank" rel="noopener" class="btn btn--ghost">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+              Watch live
+            </a>
+          </div>
+        </div>
+
+        <img src="assets/img/20-years.png" alt="20 years anniversary badge" class="hero__badge hero__layer" data-depth="0.6" />
       </div>
-      <img src="assets/img/20-years.png" alt="20 years anniversary badge" class="hero__badge" />
+      <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </section>
 
-    <!-- Scripture banner -->
-    <div class="scripture" aria-label="Scripture">
-      <div class="scripture__track">
-        <span>Go into all the world</span><em>Matthew 28:19</em><span>He has sent me to set the captives free</span><em>Luke 4:18</em><span>Teaching them to observe all things</span><em>Matthew 28:20</em>
-        <span aria-hidden="true">Go into all the world</span><em aria-hidden="true">Matthew 28:19</em><span aria-hidden="true">He has sent me to set the captives free</span><em aria-hidden="true">Luke 4:18</em><span aria-hidden="true">Teaching them to observe all things</span><em aria-hidden="true">Matthew 28:20</em>
+    <!-- ============ PARTICLE MORPH: motto integrates / disintegrates ============ -->
+    <section class="morph" id="morph" aria-label="Teaching the whole truth, delivering the captives, making disciples, go into all the world">
+      <div class="morph__pin">
+        <canvas class="morph__canvas" id="morphCanvas"></canvas>
+        <div class="morph__captions" aria-hidden="true">
+          <p data-cap="0"><span>01</span> “Teaching them to observe all things whatsoever I have commanded you.” Matthew 28:20</p>
+          <p data-cap="1"><span>02</span> “He hath sent me to preach deliverance to the captives.” Luke 4:18</p>
+          <p data-cap="2"><span>03</span> “Go ye therefore, and make disciples of all nations.” Matthew 28:19</p>
+          <p data-cap="3"><span>04</span> Our motto · Matthew 28:18–20</p>
+        </div>
+        <div class="morph__progress" aria-hidden="true"><i id="morphBar"></i></div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about section" id="about">
+      <div class="container about__grid">
+        <div class="about__media">
+          <div class="about__frame tilt" data-tilt>
+            <img src="assets/img/pastor.jpg" alt="Apostle Dr. Michael Kimuli preaching" />
+            <div class="about__tag">
+              <small>Senior Pastor</small>
+              <b>Apostle Dr. Michael Kimuli</b>
+            </div>
+          </div>
+          <img src="assets/img/logo.jpg" alt="CDMI logo" class="about__seal" />
+        </div>
+        <div class="about__copy">
+          <p class="eyebrow">Who we are</p>
+          <h2 class="h2" data-reveal>A church built on <em>prayer.</em></h2>
+          <p class="lead" data-fade>We are Christian Discipleship Ministries International (CDMI), a church family in Kololo, Kampala. We pray, we study the Word, and we help people become lifelong followers of Jesus.</p>
+          <div class="vmm">
+            <div class="vmm__item" data-fade>
+              <span class="vmm__label">Vision</span>
+              <p>To raise a revived and discipled Christian generation with a servant and father heart.</p>
+            </div>
+            <div class="vmm__item" data-fade>
+              <span class="vmm__label">Mission</span>
+              <p>To help raise and disciple a generation of prayerful Christians by mentoring, training, prayer networking and equipping them with biblical transforming principles and skills.</p>
+            </div>
+            <div class="vmm__item vmm__item--motto" data-fade>
+              <span class="vmm__label">Motto</span>
+              <p>“Go into all the world.”</p>
+              <cite>Matthew 28:18–20</cite>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Go Into All the World</span><b>✦</b><span>Making Disciples</span><b>✦</b><span>Revival</span><b>✦</b><span>The War Room</span><b>✦</b>
+        <span>Go Into All the World</span><b>✦</b><span>Making Disciples</span><b>✦</b><span>Revival</span><b>✦</b><span>The War Room</span><b>✦</b>
       </div>
     </div>
 
-    <!-- Welcome -->
-    <section class="welcome sec" id="about">
-      <div class="wrap welcome__grid">
-        <div class="welcome__copy">
-          <p class="kicker">Who we are</p>
-          <h2 class="h2" data-lines><span class="ln"><span>A church built</span></span><span class="ln"><span>on <em>prayer.</em></span></span></h2>
-          <p class="lead" data-in>We are Christian Discipleship Ministries International (CDMI), a church family in Kololo, Kampala. We pray, we study the Word, and we help people become lifelong followers of Jesus.</p>
-          <dl class="vmm">
-            <div data-in><dt>Vision</dt><dd>To raise a revived and discipled Christian generation with a servant and father heart.</dd></div>
-            <div data-in><dt>Mission</dt><dd>To help raise and disciple a generation of prayerful Christians by mentoring, training, prayer networking and equipping them with biblical transforming principles and skills.</dd></div>
-          </dl>
-        </div>
-        <figure class="welcome__media" data-in>
-          <div class="frame"><img src="assets/img/pastor.jpg" alt="Apostle Dr. Michael Kimuli preaching" loading="lazy" data-parallax="0.08" /></div>
-          <figcaption><small>Senior Pastor</small>Apostle Dr. Michael Kimuli</figcaption>
-        </figure>
-      </div>
-      <div class="wrap">
-        <p class="statement" data-words>Our motto is simple. <em>Go into all the world</em> and make disciples. Everything we do, from the prayer altar to the classroom, is about helping one more person know Jesus and follow Him for life.</p>
-      </div>
-    </section>
-
-    <!-- What we stand on -->
-    <section class="pillars sec sec--tint">
-      <div class="wrap">
-        <div class="head">
-          <p class="kicker">What we stand on</p>
-          <h2 class="h2" data-lines><span class="ln"><span>Four <em>pillars.</em></span></span></h2>
-        </div>
-        <div class="pillar-grid">
-          <article class="pillar" data-in><span class="pillar__n">01</span><h3>Teaching the whole truth</h3><p>We preach the full counsel of Scripture, plainly and without compromise.</p><cite>Matthew 28:20</cite></article>
-          <article class="pillar" data-in><span class="pillar__n">02</span><h3>Delivering the captives</h3><p>We pray for the sick and the bound, and we believe the Holy Spirit still sets people free.</p><cite>Luke 4:18</cite></article>
-          <article class="pillar" data-in><span class="pillar__n">03</span><h3>Making disciples</h3><p>Every believer is taught, mentored and sent to teach someone else.</p><cite>Matthew 28:19</cite></article>
-          <article class="pillar" data-in><span class="pillar__n">04</span><h3>A house of prayer</h3><p>From the War Room to the December conference, prayer comes first.</p><cite>Isaiah 56:7</cite></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ministries -->
-    <section class="ministries sec" id="ministries">
-      <div class="wrap">
-        <div class="head head--row">
+    <!-- ============ MINISTRIES: horizontal 3D scroll, cards open a detail drawer ============ -->
+    <section class="ministries" id="ministries">
+      <div class="ministries__pin">
+        <div class="ministries__head container">
           <div>
-            <p class="kicker">Ministries</p>
-            <h2 class="h2" data-lines><span class="ln"><span>Find your <em>place.</em></span></span></h2>
+            <p class="eyebrow">Departments &amp; Ministries</p>
+            <h2 class="h2" data-reveal>Twelve ministries. <em>One family.</em></h2>
           </div>
-          <p class="muted">Twelve ministries, one family. Pick one to see what it does and how to join.</p>
+          <p class="ministries__hint">Tap any ministry to explore it. Scroll to see more →</p>
         </div>
-        <div class="min-grid" id="minGrid"></div>
+        <div class="ministries__track" id="minTrack"><!-- rendered from DEPARTMENTS in main.js --></div>
       </div>
     </section>
 
-    <!-- Discipleship school: stacked cards -->
-    <section class="school sec sec--dark" id="school">
-      <div class="wrap school__grid">
-        <div class="school__intro">
-          <p class="kicker kicker--light">Discipleship School</p>
-          <h2 class="h2" data-lines><span class="ln"><span>From new believer</span></span><span class="ln"><span>to <em>disciple-maker.</em></span></span></h2>
-          <p class="lead" data-in>Four classes that take you deeper. Start with Foundations and keep going. You get a mentor along the way, and then you teach others.</p>
-          <a href="#visit" class="btn btn--light" data-in>Ask how to join</a>
-        </div>
-        <ol class="stack">
-          <li class="stack__card"><img src="assets/img/bible-open.jpg" alt="" loading="lazy" /><div><span>Step 01</span><h3>Foundation Classes</h3><p>Start here. Salvation, God, the Holy Spirit, prayer, the Bible and the local church.</p></div></li>
-          <li class="stack__card"><img src="assets/img/classes.jpg" alt="" loading="lazy" /><div><span>Step 02</span><h3>Discipleship Classes</h3><p>Move from knowing the truth to living it and sharing it.</p></div></li>
-          <li class="stack__card"><img src="assets/img/bible-hand.jpg" alt="" loading="lazy" /><div><span>Step 03</span><h3>Mentorship Classes</h3><p>Get paired with a mature believer who walks with you, one on one.</p></div></li>
-          <li class="stack__card"><img src="assets/img/gospel.jpg" alt="" loading="lazy" /><div><span>Step 04</span><h3>Baptism Classes</h3><p>Learn what baptism means, then take the step in front of your church family.</p></div></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Sermons -->
-    <section class="sermons sec sec--dark" id="sermons">
-      <div class="wrap">
-        <div class="head head--row">
+    <!-- ============ DISCIPLESHIP SCHOOL ============ -->
+    <section class="school section" id="discipleship">
+      <div class="container">
+        <div class="school__head">
           <div>
-            <p class="kicker kicker--light">Sermons</p>
-            <h2 class="h2" data-lines><span class="ln"><span>Hear the <em>Word.</em></span></span></h2>
+            <p class="eyebrow">Discipleship School</p>
+            <h2 class="h2" data-reveal>From new believer <em>to disciple-maker.</em></h2>
           </div>
-          <a href="https://www.youtube.com/@MichaelKimuli/videos" target="_blank" rel="noopener" class="btn btn--glass">All messages on YouTube <i class="arw">→</i></a>
+          <p class="lead" data-fade>Four classes that take you deeper. Start with Foundations and keep going. You get a mentor along the way, and then you teach others.</p>
         </div>
-        <div class="featured" id="featured"></div>
-        <div class="filters" id="filters" role="group" aria-label="Filter sermons"></div>
-        <div class="sermon-grid" id="sermonGrid"></div>
+        <div class="path">
+          <div class="path__line" aria-hidden="true"><i id="pathFill"></i></div>
+          <ol class="path__steps">
+            <li class="step">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__num">Step 01</span>
+              <h3>Foundation Classes</h3>
+              <p>Start here. Salvation, God, the Holy Spirit, prayer, the Bible and the local church.</p>
+            </li>
+            <li class="step">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__num">Step 02</span>
+              <h3>Discipleship Classes</h3>
+              <p>Move from knowing the truth to living it and sharing it.</p>
+            </li>
+            <li class="step">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__num">Step 03</span>
+              <h3>Mentorship Classes</h3>
+              <p>Get paired with a mature believer who walks with you, one on one.</p>
+            </li>
+            <li class="step">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__num">Step 04</span>
+              <h3>Baptism Classes</h3>
+              <p>Learn what baptism means, then take the step in front of your church family.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="school__cta" data-fade>
+          <p>Open to every member. <b>Ask us how to join.</b></p>
+          <a href="#branches" class="btn btn--gold">Visit us</a>
+        </div>
       </div>
     </section>
 
-    <!-- Worship gallery -->
-    <section class="gallery" aria-label="Church life gallery">
-      <div class="gallery__cols" aria-hidden="true">
-        <div class="gallery__col" data-speed="-0.12"><img src="assets/img/live-lYVuG-ulbSM.jpg" alt="" loading="lazy" /><img src="assets/img/prayer.jpg" alt="" loading="lazy" /><img src="assets/img/children.jpg" alt="" loading="lazy" /></div>
-        <div class="gallery__col" data-speed="0.1"><img src="assets/img/fellowship.jpg" alt="" loading="lazy" /><img src="assets/img/live-htXE3SCGm0U.jpg" alt="" loading="lazy" /><img src="assets/img/worship-guitar.jpg" alt="" loading="lazy" /></div>
-        <div class="gallery__col" data-speed="-0.06"><img src="assets/img/yt-n896xRjB2Ww.jpg" alt="" loading="lazy" /><img src="assets/img/evangelism.jpg" alt="" loading="lazy" /><img src="assets/img/live-yn3N_pPrTQM.jpg" alt="" loading="lazy" /></div>
-        <div class="gallery__col" data-speed="0.14"><img src="assets/img/generations.jpg" alt="" loading="lazy" /><img src="assets/img/live-4oMZBjtEei0.jpg" alt="" loading="lazy" /><img src="assets/img/women-fellowship.jpg" alt="" loading="lazy" /></div>
-      </div>
-      <div class="gallery__title">
-        <p class="kicker kicker--light">Church life</p>
-        <h2 data-lines><span class="ln"><span>Come and <em>see.</em></span></span></h2>
-        <p data-in>Worship, prayer, the Word and a family that will know your name.</p>
+    <!-- ============ GATHERINGS (light section) ============ -->
+    <section class="gatherings section" id="gatherings">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow eyebrow--dark">Gatherings</p>
+          <h2 class="h2" data-reveal>There is a seat <em>for you.</em></h2>
+        </div>
+        <div class="gather-grid">
+          <article class="gcard" data-fade>
+            <div class="gcard__icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M9 5h6M5 22V12l7-4 7 4v10M9 22v-5h6v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+            <p class="gcard__when">Sundays</p>
+            <h3>Sunday Service</h3>
+            <p>Worship, the Word and church family. Look out for Youth Sundays and Care-ring Sundays.</p>
+          </article>
+          <article class="gcard" data-fade>
+            <div class="gcard__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <p class="gcard__when">Weekdays · Lunch hour</p>
+            <h3>Lunch Hour Fellowship</h3>
+            <p>A midday break with the Word, right in the middle of the city.</p>
+          </article>
+          <article class="gcard" data-fade>
+            <div class="gcard__icon"><svg viewBox="0 0 24 24"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+            <p class="gcard__when">Evenings</p>
+            <h3>War Room Experience</h3>
+            <p>Evening prayer for families, the church, Uganda and the nations.</p>
+          </article>
+          <article class="gcard" data-fade>
+            <div class="gcard__icon"><svg viewBox="0 0 24 24"><path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zM20 5h-6M20 5v13h-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+            <p class="gcard__when">Training</p>
+            <h3>Prayer School</h3>
+            <p>Learn to pray with faith, authority and consistency.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- Events -->
-    <section class="events sec" id="events">
-      <div class="wrap">
-        <div class="head head--row">
+    <!-- ============ SIGNATURE EVENTS: hover list with floating image ============ -->
+    <section class="events section" id="events">
+      <div class="container">
+        <div class="section-head section-head--row">
           <div>
-            <p class="kicker">Events &amp; gatherings</p>
-            <h2 class="h2" data-lines><span class="ln"><span>Join us <em>this week.</em></span></span></h2>
+            <p class="eyebrow">Signature Events</p>
+            <h2 class="h2" data-reveal>Seasons of <em>encounter.</em></h2>
           </div>
-          <p class="muted">Weekly gatherings, plus the big moments each ministry hosts through the year.</p>
+          <p class="events__note">Tap any event to see the ministry behind it.</p>
         </div>
-
-        <div class="conf" id="conference">
-          <div class="conf__img"><img src="assets/img/prayer.jpg" alt="People praying with hands raised" loading="lazy" data-parallax="0.1" /></div>
-          <div class="conf__body">
-            <p class="kicker kicker--light">Annual Prayer Conference 2026</p>
-            <h3>Revive Thy work <em>in the midst of the years.</em></h3>
-            <p>We close the year together in fasting, prayer and worship, and believe God for breakthrough and revival in the year ahead.</p>
-            <p class="conf__meta"><span>Sunday, 20 December 2026</span><span>CDMI Church, Kololo</span></p>
-            <div class="countdown" data-countdown="full" aria-live="polite">
-              <div><b data-u="d">00</b><span>Days</span></div>
-              <div><b data-u="h">00</b><span>Hours</span></div>
-              <div><b data-u="m">00</b><span>Minutes</span></div>
-              <div><b data-u="s">00</b><span>Seconds</span></div>
-            </div>
-            <div class="row">
-              <a class="btn btn--light" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=CDMI%20Annual%20Prayer%20Conference%202026&dates=20261220T060000Z/20261220T150000Z&details=Annual%20Prayer%20Conference%20at%20Christian%20Discipleship%20Ministries%20International&location=Plot%203A%2F3%20Hesketh%20Bell%20Rd%2C%20Kololo%2C%20Kampala">Add to calendar</a>
-              <a class="btn btn--glass" href="https://www.youtube.com/@MichaelKimuli" target="_blank" rel="noopener">Stream on YouTube</a>
-            </div>
-          </div>
+        <ul class="event-list" id="eventList"><!-- rendered from EVENTS in main.js --></ul>
+      </div>
+      <div class="event-float" id="eventFloat" aria-hidden="true"><img alt="" /></div>
+    </section>
+    <!-- ============ CONFERENCE: tile disintegrate + countdown ============ -->
+    <section class="conference" id="conference">
+      <div class="conference__tiles" id="tiles" aria-hidden="true"></div>
+      <div class="conference__shade"></div>
+      <div class="container conference__inner">
+        <p class="eyebrow eyebrow--gold">Annual Prayer Conference 2026</p>
+        <h2 class="conference__title" data-reveal>Revive Thy Work <em>in the midst of the years.</em></h2>
+        <p class="conference__lede" data-fade>We close the year together in fasting, prayer and worship, and believe God for breakthrough and revival in the year ahead.</p>
+        <p class="conference__meta">
+          <span><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Sunday, 20 December 2026</span>
+          <span><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> CDMI Church, Kololo</span>
+        </p>
+        <div class="countdown" data-countdown="full" aria-live="polite">
+          <div class="countdown__unit"><b data-u="d">00</b><span>Days</span></div>
+          <div class="countdown__unit"><b data-u="h">00</b><span>Hours</span></div>
+          <div class="countdown__unit"><b data-u="m">00</b><span>Minutes</span></div>
+          <div class="countdown__unit"><b data-u="s">00</b><span>Seconds</span></div>
         </div>
-
-        <h3 class="sub">Every week</h3>
-        <div class="week-grid">
-          <article class="wcard" data-in><p class="wcard__when">Sundays</p><h4>Sunday Service</h4><p>Worship, the Word and church family. Look out for Youth Sundays and Care-ring Sundays.</p></article>
-          <article class="wcard" data-in><p class="wcard__when">Weekdays · Lunch hour</p><h4>Lunch Hour Fellowship</h4><p>A midday break with the Word, right in the middle of the city.</p></article>
-          <article class="wcard" data-in><p class="wcard__when">Evenings</p><h4>War Room Experience</h4><p>Evening prayer for families, the church, Uganda and the nations.</p></article>
-          <article class="wcard" data-in><p class="wcard__when">Training</p><h4>Prayer School</h4><p>Learn to pray with faith, authority and consistency.</p></article>
+        <div class="conference__actions">
+          <a class="btn btn--gold" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=CDMI%20Annual%20Prayer%20Conference%202026&dates=20261220T060000Z/20261220T150000Z&details=Annual%20Prayer%20Conference%20at%20Christian%20Discipleship%20Ministries%20International&location=Plot%203A%2F3%20Hesketh%20Bell%20Rd%2C%20Kololo%2C%20Kampala">Add to calendar</a>
+          <a class="btn btn--ghost" href="https://www.youtube.com/@MichaelKimuli" target="_blank" rel="noopener">Stream on YouTube</a>
         </div>
-
-        <h3 class="sub">Through the year</h3>
-        <div class="event-grid" id="eventGrid"></div>
       </div>
     </section>
 
-    <!-- 20 years -->
-    <section class="anniv sec sec--tint" id="anniversary">
-      <div class="wrap anniv__grid">
-        <img src="assets/img/20-years.png" alt="Celebrating 20 Years Anniversary badge" class="anniv__badge" loading="lazy" data-in />
+    <!-- ============ 20 YEARS ============ -->
+    <section class="anniv section" id="anniversary">
+      <div class="anniv__big" aria-hidden="true">20</div>
+      <div class="container anniv__grid">
+        <div class="anniv__badge-wrap">
+          <img src="assets/img/20-years.png" alt="Celebrating 20 Years Anniversary badge" class="anniv__badge" id="annivBadge" />
+        </div>
         <div>
-          <p class="kicker">2006 to 2026</p>
-          <h2 class="h2" data-lines><span class="ln"><span>Twenty years of</span></span><span class="ln"><span><em>God’s faithfulness.</em></span></span></h2>
-          <p class="lead" data-in>Twenty years of prayer altars, discipleship classes and new branches. We are looking back with thanks and forward with faith.</p>
+          <p class="eyebrow eyebrow--gold">2006 to 2026</p>
+          <h2 class="h2" data-reveal>Twenty years of <em>God’s faithfulness.</em></h2>
+          <p class="lead" data-fade>Twenty years of prayer altars, discipleship classes and new branches. We are looking back with thanks and forward with faith.</p>
           <div class="stats">
-            <div data-in><b data-count="20">0</b><small>Years of ministry</small></div>
-            <div data-in><b data-count="12">0</b><small>Ministries serving today</small></div>
-            <div data-in><b data-count="4">0</b><small>Discipleship classes</small></div>
+            <div class="stat" data-fade><b><span data-count="20">0</span></b><small>Years of ministry</small></div>
+            <div class="stat" data-fade><b><span data-count="3">0</span></b><small>Pillars of our mission</small></div>
+            <div class="stat" data-fade><b><span data-count="12">0</span></b><small>Ministries serving today</small></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Testimonies -->
-    <section class="testimonies sec" id="testimonies">
-      <div class="wrap">
-        <div class="head">
-          <p class="kicker">Testimonies</p>
-          <h2 class="h2" data-lines><span class="ln"><span>Stories of God’s <em>faithfulness.</em></span></span></h2>
-        </div>
-        <div id="testimonyList"></div>
-      </div>
-    </section>
-
-    <!-- Giving -->
-    <section class="give sec sec--dark" id="give">
-      <div class="wrap give__grid">
-        <div>
-          <p class="kicker kicker--light">Give</p>
-          <h2 class="h2" data-lines><span class="ln"><span>Partner with us in</span></span><span class="ln"><span>the <em>gospel.</em></span></span></h2>
-          <p class="lead" data-in>Giving is worship. Your tithes and offerings keep the doors open, train disciples and take the gospel into Kampala and beyond.</p>
-          <a href="https://www.instagram.com/cdmi_church/" target="_blank" rel="noopener" class="btn btn--light" data-in>Ask us how to give</a>
-        </div>
-        <ul class="give__list">
-          <li data-in><h3>Tithes &amp; offerings</h3><p>Support the weekly life of the church: services, pastoral care and the Discipleship School.</p></li>
-          <li data-in><h3>Missions &amp; outreach</h3><p>Street evangelism, hospital and prison visits, and new branches.</p></li>
-          <li data-in><h3>Charity</h3><p>Practical help for families and people in need in our community.</p></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Visit / contact -->
-    <section class="visit sec" id="visit">
-      <div class="wrap">
-        <div class="head">
-          <p class="kicker">Plan your visit</p>
-          <h2 class="h2" data-lines><span class="ln"><span>We would love to</span></span><span class="ln"><span><em>welcome you.</em></span></span></h2>
-        </div>
-        <div class="visit__grid">
-          <div class="visit__map" data-in>
-            <iframe title="Map of CDMI Church Kololo" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=CDMI+Church+Kololo,+Hesketh+Bell+Road,+Kampala&output=embed"></iframe>
+    <!-- ============ SERMONS ============ -->
+    <section class="sermons section" id="sermons">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <p class="eyebrow">Sermons</p>
+            <h2 class="h2" data-reveal>Hear the <em>Word.</em></h2>
           </div>
-          <div class="visit__info">
-            <article class="vcard" data-in>
+          <a href="https://www.youtube.com/@MichaelKimuli/videos" target="_blank" rel="noopener" class="btn btn--ghost">All messages on YouTube →</a>
+        </div>
+
+        <div class="featured" data-fade>
+          <button class="featured__player" id="featured" data-id="2GweiW5qXbk" aria-label="Play Remember the Lord">
+            <img src="assets/img/yt-2GweiW5qXbk.jpg" alt="Remember the Lord sermon thumbnail" />
+            <span class="play"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+          </button>
+          <div class="featured__info">
+            <p class="eyebrow">Featured message</p>
+            <h3>Remember the Lord</h3>
+            <p>Apostle Dr. Michael Kimuli · Deuteronomy 8:10–18</p>
+          </div>
+        </div>
+
+        <div class="sermon-grid">
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=htXE3SCGm0U" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/live-htXE3SCGm0U.jpg" alt="" loading="lazy" /></div>
+            <h4>The Power of Sacrifice</h4><p>Lunch Hour Service</p>
+          </a>
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=d-K6lHyLABI" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/yt-d-K6lHyLABI.jpg" alt="" loading="lazy" /></div>
+            <h4>Free Indeed (II)</h4><p>Ap. Dr. Michael Kimuli</p>
+          </a>
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=L0gaCm4O8GI" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/yt-L0gaCm4O8GI.jpg" alt="" loading="lazy" /></div>
+            <h4>God Rolls Away the Reproach</h4><p>Free Indeed series</p>
+          </a>
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=PpwA4a1_1TQ" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/yt-PpwA4a1_1TQ.jpg" alt="" loading="lazy" /></div>
+            <h4>The Spirit of Profitless Labour</h4><p>Deliverance teaching</p>
+          </a>
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=oabeChsTFec" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/yt-oabeChsTFec.jpg" alt="" loading="lazy" /></div>
+            <h4>Deliverance of the Soul</h4><p>Pr. Michael Kutesa</p>
+          </a>
+          <a class="sermon" data-fade href="https://www.youtube.com/watch?v=n896xRjB2Ww" target="_blank" rel="noopener">
+            <div class="sermon__img"><img src="assets/img/yt-n896xRjB2Ww.jpg" alt="" loading="lazy" /></div>
+            <h4>Women’s Conference 2026</h4><p>Praise &amp; Worship</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRANCHES ============ -->
+    <section class="branches section" id="branches">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Branches</p>
+          <h2 class="h2" data-reveal>One family, <em>many altars.</em></h2>
+        </div>
+        <div class="branch-grid">
+          <article class="branch branch--main" data-fade>
+            <div class="branch__map">
+              <iframe title="Map of CDMI Church Kololo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=CDMI+Church+Kololo,+Hesketh+Bell+Road,+Kampala&output=embed"></iframe>
+            </div>
+            <div class="branch__body">
               <span class="pill">Headquarters</span>
               <h3>CDMI Church Kololo</h3>
               <p>Plot 3A/3 Hesketh Bell Road, Kololo, Kampala, Uganda</p>
-              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=CDMI+Church+Kololo+Hesketh+Bell+Road+Kampala">Get directions <i class="arw">→</i></a>
-            </article>
-            <article class="vcard" data-in>
+              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=CDMI+Church+Kololo+Hesketh+Bell+Road+Kampala">Get directions →</a>
+            </div>
+          </article>
+          <article class="branch" data-fade>
+            <div class="branch__img"><img src="assets/img/church.jpg" alt="Church rooftop with cross against a blue sky" loading="lazy" /></div>
+            <div class="branch__body">
               <span class="pill">Branch</span>
               <h3>CDMI Mulawa</h3>
               <p>Our congregation in Mulawa, Wakiso.</p>
-              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mulawa+Uganda">Get directions <i class="arw">→</i></a>
-            </article>
-            <article class="vcard vcard--soft" data-in>
-              <h3>What to expect</h3>
-              <ul class="ticks">
-                <li>Lively, Spirit-led worship and clear teaching from the Bible.</li>
-                <li>Prayer ministry is open to anyone who wants it.</li>
-                <li>Kids have their own classes with trained teachers.</li>
-                <li>Wear what you are comfortable in. Someone will help you find a seat.</li>
-              </ul>
-            </article>
-            <article class="vcard vcard--soft" data-in>
+              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mulawa+Uganda">Get directions →</a>
+            </div>
+          </article>
+          <article class="branch branch--more" data-fade>
+            <div class="branch__body">
               <h3>More branches</h3>
               <p>CDMI has more congregations in Uganda and beyond. Message us and we will point you to the closest one.</p>
-              <a class="btn btn--accent btn--sm" target="_blank" rel="noopener" href="https://www.instagram.com/cdmi_church/">Message us</a>
-            </article>
-          </div>
+              <a class="btn btn--gold" target="_blank" rel="noopener" href="https://www.instagram.com/cdmi_church/">Message us</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="wrap footer__grid">
+    <div class="footer__big" aria-hidden="true"><span data-split>Making Disciples</span></div>
+    <div class="container footer__grid">
       <div class="footer__brand">
-        <img src="assets/img/logo.jpg" alt="CDMI logo" width="56" height="56" />
-        <p>To raise a revived and discipled Christian generation with a servant and father heart.</p>
-        <p class="footer__verse"><em>“Go into all the world.”</em> Matthew 28:18–20</p>
+        <img src="assets/img/logo.jpg" alt="CDMI logo" />
+        <p class="footer__vision">“Go into all the world.” Matthew 28:18–20</p>
+        <p>Christian Discipleship Ministries International<br />Plot 3A/3 Hesketh Bell Rd, Kololo, Kampala</p>
       </div>
-      <div><h4>Explore</h4><a href="#about">About Us</a><a href="#ministries">Ministries</a><a href="#school">Discipleship School</a><a href="#sermons">Sermons</a><a href="#events">Events</a></div>
-      <div><h4>Visit</h4><p>Sundays at CDMI Kololo<br />Plot 3A/3 Hesketh Bell Rd<br />Kololo, Kampala</p><a href="#give">Give</a></div>
-      <div><h4>Follow</h4>
+      <div>
+        <h5>Explore</h5>
+        <a href="#about">About</a><a href="#ministries">Ministries</a><a href="#discipleship">Discipleship School</a><a href="#events">Events</a><a href="#sermons">Sermons</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
         <a href="https://www.youtube.com/@MichaelKimuli" target="_blank" rel="noopener">YouTube</a>
         <a href="https://www.instagram.com/cdmi_church/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/search/top?q=CDMI%20Church%20Kololo" target="_blank" rel="noopener">Facebook</a>
       </div>
     </div>
-    <div class="wrap footer__bottom"><span>© <span id="year">2026</span> Christian Discipleship Ministries International</span><span>Teaching the whole truth. Delivering the captives. Making disciples.</span></div>
-    <div class="footer__mark" aria-hidden="true">CDMI</div>
+    <div class="container footer__bottom">
+      <span>© <span id="year">2026</span> CDMI Church. All rights reserved.</span>
+      <span>Teaching the whole truth. Delivering the captives. Making disciples.</span>
+    </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="assets/data.js"></script>
   <script src="main.js"></script>
 </body>

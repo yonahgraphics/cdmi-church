@@ -158,20 +158,3 @@ window.CDMI_EVENTS = [
   { name: "Marrieds Retreat", by: "Marrieds Ministry", dept: "marrieds", img: "assets/img/retreat.jpg" },
   { name: "Business Clinic", by: "Career & Business", dept: "business", img: "assets/img/business.jpg" }
 ];
-
-/* Sermons. The first one is featured. Add new messages to the top.
-   topic and speaker drive the filter buttons. */
-window.CDMI_SERMONS = [
-  { id: "2GweiW5qXbk", title: "Remember the Lord", speaker: "Apostle Dr. Michael Kimuli", scripture: "Deuteronomy 8:10–18", topic: "Faith", img: "assets/img/yt-2GweiW5qXbk.jpg" },
-  { id: "htXE3SCGm0U", title: "The Power of Sacrifice", speaker: "Apostle Dr. Michael Kimuli", scripture: "", topic: "Lunch Hour", img: "assets/img/live-htXE3SCGm0U.jpg" },
-  { id: "d-K6lHyLABI", title: "Free Indeed (II)", speaker: "Apostle Dr. Michael Kimuli", scripture: "", topic: "Deliverance", img: "assets/img/yt-d-K6lHyLABI.jpg" },
-  { id: "L0gaCm4O8GI", title: "God Rolls Away the Reproach", speaker: "Apostle Dr. Michael Kimuli", scripture: "", topic: "Deliverance", img: "assets/img/yt-L0gaCm4O8GI.jpg" },
-  { id: "PpwA4a1_1TQ", title: "The Spirit of Profitless Labour", speaker: "Apostle Dr. Michael Kimuli", scripture: "", topic: "Deliverance", img: "assets/img/yt-PpwA4a1_1TQ.jpg" },
-  { id: "oabeChsTFec", title: "Deliverance of the Soul", speaker: "Pr. Michael Kutesa", scripture: "", topic: "Deliverance", img: "assets/img/yt-oabeChsTFec.jpg" },
-  { id: "n896xRjB2Ww", title: "Women’s Conference 2026", speaker: "Worship Ministry", scripture: "", topic: "Worship", img: "assets/img/yt-n896xRjB2Ww.jpg" }
-];
-
-/* Testimonies. Add real stories with the member's permission, e.g.
-   { name: "Grace", text: "…", img: "" }
-   While this list is empty, the page shows an invitation to share a story. */
-window.CDMI_TESTIMONIES = [];
