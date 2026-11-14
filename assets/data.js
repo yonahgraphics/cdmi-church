@@ -3,156 +3,144 @@
 window.CDMI_DEPARTMENTS = [
   {
     id: "pastoral", name: "Pastoral Team", img: "assets/img/live-htXE3SCGm0U.jpg",
-    tagline: "Shepherding hearts. Guiding lives. Serving all.",
+    tagline: "We walk with you through every season.",
     text: [
-      "At the heart of CDMI Church is a pastoral team deeply committed to the spiritual growth, emotional wellbeing and purposeful living of every member. Led by the vision to raise a revived and discipled generation, our pastors provide Spirit-led guidance through preaching, counselling and personal mentorship.",
-      "The Pastoral Team oversees the spiritual direction of all ministries, walks closely with members through life’s seasons, from celebration to challenge, and keeps the church rooted in biblical truth and prayer. They are not just leaders. They are servants who carry a father’s heart for every soul in the CDMI family.",
-      "Whether you need prayer, guidance or simply someone to walk with you, the Pastoral Team is here for you."
+      "Our pastors preach, counsel and mentor, and they keep every ministry at CDMI rooted in the Word and in prayer.",
+      "Celebrating something? Going through something? Talk to us. We would love to pray with you."
     ],
     programmes: [
-      ["Annual December Prayer Conference", "A powerful, year-closing gathering that brings the entire CDMI family together in corporate fasting, intercession and worship, setting the spiritual tone for the coming year and believing God for breakthrough, revival and kingdom advancement."],
-      ["Prayer School", "A structured training programme that raises fervent, effective prayer warriors. Members learn the principles, postures and power of prayer, so they can pray with faith, authority and consistency."],
-      ["War Room Experience", "An intense, focused season of strategic intercession inspired by the biblical call to spiritual warfare, with targeted prayer for families, the church, the nation and the nations."],
-      ["Baptism", "A sacred and celebratory milestone. Water baptism at CDMI is a public declaration of faith, proclaiming death to the old life and resurrection into new life in Christ Jesus."]
+      ["Annual December Prayer Conference", "We close the year together in fasting, intercession and worship, and set the tone for the year ahead."],
+      ["Prayer School", "Practical training in how to pray with faith, authority and consistency."],
+      ["War Room Experience", "Focused seasons of strategic prayer for families, the church, Uganda and the nations."],
+      ["Baptism", "Water baptism is your public step of faith. Our pastors lead it and celebrate it with you."]
     ]
   },
   {
     id: "admin", name: "Administration", img: "assets/img/admin.jpg",
-    tagline: "Excellence behind every ministry. Order that fuels purpose.",
+    tagline: "The team that keeps it all running.",
     text: [
-      "Great ministry is built on faithful, behind-the-scenes service, and that is exactly what the Administration Department provides. This team ensures that every programme, event and initiative at CDMI runs smoothly, efficiently and with excellence.",
-      "From coordinating communications and managing church resources to supporting leadership and maintaining operational systems, Administration is the backbone that keeps our vision moving forward: the quiet force that turns purpose into action, so that no detail is overlooked and no member is left unserved.",
-      "If you have a gift for organisation, problem-solving or service, the Administration Department is your calling."
+      "Communications, resources, scheduling and systems. Administration makes sure every service, event and programme happens well.",
+      "Good at organising and solving problems? We need you on this team."
     ],
     programmes: []
   },
   {
     id: "men", name: "Men’s Ministry", img: "assets/img/live-4oMZBjtEei0.jpg",
-    tagline: "Raising men of God. Bold in faith. Strong in purpose.",
+    tagline: "Men growing in faith, together.",
     text: [
-      "The Men’s Ministry is a brotherhood built on prayer, accountability and a shared commitment to becoming the men God has called us to be in our homes, workplaces and communities. When men are discipled and anchored in Christ, families are strengthened and nations are transformed.",
-      "Through fellowship gatherings, Bible study, mentorship and community service, we equip men to lead with integrity, love with sacrifice and serve with humility.",
-      "Come and stand with men who are going somewhere, and who will not leave you behind."
+      "A brotherhood built on prayer, honesty and accountability. We study the Word, mentor one another and serve our community.",
+      "Strong men make strong homes. Wherever you are in your faith, there is a seat for you."
     ],
     programmes: [
-      ["Men’s Conference", "An annual gathering of worship, the Word and authentic fellowship that challenges, equips and sends men back into their spheres of influence as servant-leaders who reflect the heart of God."],
-      ["High Value Men", "A discipleship and development programme that goes beyond Sunday, investing deeply in the character, vision and skills of men and building a culture of excellence, accountability and kingdom-minded ambition."]
+      ["Men’s Conference", "Our yearly gathering of worship, teaching and real conversation, built to send men home ready to lead."],
+      ["High Value Men", "A year-round programme that invests in your character, vision and skills."]
     ]
   },
   {
     id: "women", name: "Women’s Ministry", img: "assets/img/yt-n896xRjB2Ww.jpg",
-    tagline: "Empowered women. Transformed lives. Kingdom impact.",
+    tagline: "Know who you are in Christ.",
     text: [
-      "The Women’s Ministry is a vibrant community of women walking together in faith, healing, growth and purpose. We celebrate every woman, in her strength and in her struggle, and create spaces where she can encounter God deeply and live boldly.",
-      "Through Bible studies, prayer circles, discipleship programmes and conferences, we equip women to discover their God-given identity and fulfil their calling. A woman rooted in the Word is a force for transformation in her family, her church and her world.",
-      "You are welcome here, exactly as you are, and for all that God is calling you to become."
+      "A community of women growing together through Bible study, prayer circles and discipleship.",
+      "We make room for your strengths and your struggles, and we help you step into everything God has for you."
     ],
     programmes: [
-      ["Women’s Conference", "A landmark annual event that gathers women across generations for anointed teaching, worship and fellowship: a space of healing, empowerment and divine encounter."],
-      ["Pastors’ Wives Conference", "A gathering that honours and strengthens the women who stand behind and beside those who lead, giving ministry wives a safe, nurturing space to be refreshed, encouraged and equipped."]
+      ["Women’s Conference", "Our yearly gathering for women of every generation: teaching, worship, healing and fellowship."],
+      ["Pastors’ Wives Conference", "Time set apart to refresh and encourage women serving alongside pastors."]
     ]
   },
   {
     id: "marrieds", name: "Marrieds Ministry", img: "assets/img/marrieds.jpg",
-    tagline: "Building godly homes. Strengthening covenant love.",
+    tagline: "Stronger marriages. Godly homes.",
     text: [
-      "Marriage is one of God’s most powerful gifts and one of the greatest opportunities for discipleship. The Marrieds Ministry helps couples build homes that reflect the love of Christ: rooted in prayer, grounded in the Word and rich with grace and understanding.",
-      "Through couples’ fellowships, marriage enrichment workshops, counselling referrals and practical discipleship, we walk alongside couples at every stage, from newlyweds to long-standing partners navigating new seasons.",
-      "Your marriage matters to God, and it matters to us. Come grow together."
+      "Couples’ fellowships, enrichment workshops and practical teaching for every stage of marriage, from newlyweds to decades in.",
+      "Your marriage matters to God. Grow it with other couples who get it."
     ],
     programmes: [
-      ["Marrieds Meetings & Retreats", "Regular fellowship meetings and periodic retreats that give couples intentional time to connect, reflect and grow, blending biblical teaching, open conversation, prayer and recreation."],
-      ["Parenting Sessions", "Practical, biblically grounded sessions on raising children with godly values, emotional intelligence and a strong sense of identity, covering discipline, communication, faith formation and digital culture."]
+      ["Marrieds Meetings & Retreats", "Regular meetups and getaways to connect, pray, talk honestly and have fun together."],
+      ["Parenting Sessions", "Real help on discipline, communication, faith at home and raising kids in a digital world."]
     ]
   },
   {
     id: "youth", name: "Youth Ministry", img: "assets/img/fellowship.jpg",
-    tagline: "This generation has a purpose. We are here to ignite it.",
+    tagline: "Ages 13 to 30. The church of today.",
     text: [
-      "The CDMI Youth Ministry exists to raise a bold, revived generation of young people who are not just churchgoers but world-changers. Young people are not the church of tomorrow. They are the church of today, and we invest in them accordingly.",
-      "Through dynamic worship, discipleship, leadership training and community outreach, we build a culture where faith is exciting, questions are welcome and every young person knows they belong.",
-      "If you are between 13 and 30, this is your space. Come as you are, and leave ready to change the world."
+      "Worship nights, discipleship, leadership training and outreach for young people ready to live on purpose.",
+      "Bring your questions. You belong here."
     ],
     programmes: [
-      ["Addicted to Jesus Youth Camp", "An immersive, multi-day camp that takes young people out of their comfort zones and into a radical encounter with God, leaving them unashamedly in love with Jesus."],
-      ["Youth Sundays", "Sundays where the youth lead worship, prayer and the preaching of the Word, celebrating the gifts and anointing on the next generation."],
-      ["Bridging the Generational Gap Conference", "An intergenerational conference for honest, Spirit-led conversation between older and younger members, because the church is strongest when every generation walks together."],
-      ["Destiny Altar", "A regular call to consecration where young people surrender their futures to God, make commitments, receive prayer and step into His purposes for their lives."]
+      ["Addicted to Jesus Youth Camp", "A multi-day camp built for real encounters with God, away from the usual routine."],
+      ["Youth Sundays", "Young people lead the worship, the prayers and the preaching."],
+      ["Bridging the Generational Gap", "Older and younger members in honest conversation. Every generation learns from the other."],
+      ["Destiny Altar", "Regular moments to give your future to God and receive prayer for what is next."]
     ]
   },
   {
     id: "children", name: "Children’s Ministry", img: "assets/img/children.jpg",
-    tagline: "Little ones. Big faith. Lifelong foundations.",
+    tagline: "Big faith starts early.",
     text: [
-      "Faith planted early grows strong for a lifetime. The Children’s Ministry is a joyful, safe and Spirit-filled space where children from birth to age 12 encounter God in age-appropriate, engaging and transformative ways.",
-      "Trained teachers and volunteers use Bible storytelling, worship, creative activities and prayer to nurture a living faith in every child. We partner closely with parents, because home and church must work hand in hand to disciple the next generation.",
-      "Every child who walks through our doors is seen, valued and loved, just as they are by their Heavenly Father."
+      "A safe, joyful space for kids from birth to 12. Bible stories, worship, creative activities and prayer, led by trained teachers.",
+      "We partner with parents, because faith grows best when home and church work together."
     ],
     programmes: []
   },
   {
     id: "worship", name: "Worship Ministry", img: "assets/img/live-lYVuG-ulbSM.jpg",
-    tagline: "Where heaven meets earth. Every song, an offering.",
+    tagline: "Leading the church into God’s presence.",
     text: [
-      "Worship at CDMI is more than music. It is a ministry of presence, prayer and encounter. Our worship teams, choirs and instrumentalists are servants first, using their gifts to usher the congregation into the presence of God.",
-      "We pursue excellence in worship, not for performance but as an act of honour to God, in Sunday services, special events and prayer gatherings.",
-      "Do you have a gift in singing, playing or leading? Join a team that worships in spirit and in truth."
+      "Our singers, choirs and musicians lead worship at Sunday services, events and prayer gatherings. We aim for excellence, as an offering to God rather than a performance.",
+      "Sing, play or lead? We would love to hear from you."
     ],
     programmes: [
-      ["Hymn Experience", "A reverent evening dedicated to the timeless hymns of the faith, honouring the saints who went before us and rediscovering the depth and beauty of the songs we have sung for generations."],
-      ["Ignite Worship Night", "A high-energy, Spirit-charged night of extended, unrestrained praise and worship, where the Holy Spirit moves freely, burdens are lifted and God’s presence fills the room."]
+      ["Hymn Experience", "An evening with the great hymns of the faith, sung together."],
+      ["Ignite Worship Night", "A full night of high-energy, Spirit-led praise and worship."]
     ]
   },
   {
     id: "business", name: "Career & Business", img: "assets/img/business.jpg",
-    tagline: "Faith at work. Excellence in the marketplace.",
+    tagline: "Your faith goes to work with you.",
     text: [
-      "God’s call does not end at the church door. It extends into every boardroom, classroom and marketplace. This ministry equips members to integrate their faith with their professional lives, building careers and businesses that honour God and serve humanity.",
-      "Through mentorship, business training, networking and practical discipleship, we help members grow in competence and character, tackling financial stewardship, ethical leadership and entrepreneurship through biblical principle.",
-      "Student, job-seeker, entrepreneur or seasoned professional: this is your community of growth in the marketplace."
+      "Mentorship, business training and networking for students, job-seekers, entrepreneurs and professionals.",
+      "We cover money, ethics and leadership, and build careers and businesses that honour God."
     ],
     programmes: [
-      ["Business & Career Altar", "A prayer and consecration moment where members bring their careers and business visions before God, believing that kingdom-minded professionals transform the marketplace."],
-      ["Business Clinic", "Hands-on guidance, mentorship and peer support on real business and career challenges, from business planning and financial management to personal branding."],
-      ["Christian Discipleship Savings Scheme", "A kingdom-minded savings initiative that builds the discipline of saving and wise stewardship, because financial integrity and generosity are part of discipleship."]
+      ["Business & Career Altar", "Bring your work, your plans and your business before God in prayer."],
+      ["Business Clinic", "Hands-on help with business plans, finances, branding and career moves."],
+      ["Christian Discipleship Savings Scheme", "Build the habit of saving and wise stewardship, together."]
     ]
   },
   {
     id: "evangelism", name: "Evangelism & Charity", img: "assets/img/evangelism.jpg",
-    tagline: "“Go into all the world.” Matthew 28:19",
+    tagline: "Taking the gospel outside the walls.",
     text: [
-      "Rooted in Christ’s great commission, Evangelism and Charity is the outward arm of CDMI, reaching beyond our walls to bring the love of God to communities in need. The Gospel is both a word to be proclaimed and a life to be demonstrated through service, compassion and justice.",
-      "Our teams engage in community outreach, street evangelism, hospital and prison visits, and charity drives for the vulnerable and marginalised.",
-      "You do not need to be fully equipped before you serve. Come with a willing heart, and we will go into all the world together."
+      "Street evangelism, community outreach, hospital and prison visits, and charity drives for people who need it most.",
+      "You do not need to have it all figured out to serve. Bring a willing heart and come with us."
     ],
     programmes: []
   },
   {
     id: "school", name: "Discipleship School", img: "assets/img/classes.jpg",
-    tagline: "Transformed minds. Equipped disciples. Multiplying impact.",
+    tagline: "Go deeper in the Word.",
     text: [
-      "The Discipleship School is the training ground for every believer who desires to go deeper in the Word, in prayer and in their calling. In fulfilment of our mission, it offers structured, Bible-based training at every stage of the spiritual journey.",
-      "Courses cover foundational doctrine, prayer and intercession, biblical leadership, Christian living and ministry skills. Students are mentored, challenged and sent out to multiply what they have received.",
-      "Open to every member who is serious about growing in Christ. Enrol: your next level begins here."
+      "Structured, Bible-based classes in doctrine, prayer, leadership, Christian living and ministry skills.",
+      "Every student is mentored and sent out to teach others what they have learned."
     ],
     programmes: [
-      ["Foundation / Beginners’ Classes", "The essential starting point: salvation, the nature of God, the Holy Spirit, prayer, the Word and the local church."],
-      ["Discipleship Classes", "Intermediate training that bridges belief and practice, equipping members to know the truth, live it and share it."],
-      ["Mentorship Classes", "Structured, intentional relationships with mature mentors, because discipleship is caught as much as it is taught."],
-      ["Baptism Classes", "Preparation in the meaning and biblical basis of water baptism, so every candidate makes an informed, heartfelt declaration."]
+      ["Foundation Classes", "Start here: salvation, God, the Holy Spirit, prayer, the Bible and the local church."],
+      ["Discipleship Classes", "Move from knowing the truth to living it and sharing it."],
+      ["Mentorship Classes", "Get paired with a mature believer who will walk with you."],
+      ["Baptism Classes", "Understand what baptism means before you take the step."]
     ]
   },
   {
     id: "care", name: "Care-rings", img: "assets/img/care.jpg",
-    tagline: "Nobody walks alone. Every member, every season.",
+    tagline: "No one walks alone here.",
     text: [
-      "Care-rings is the pastoral care arm of CDMI, a network of love and support that makes sure no member is ever lost, overlooked or left to face life’s challenges alone. The church is a family, and Care-rings makes that family real and close.",
-      "Through care groups, fellowships and a culture of intentional connection, every member is known by name, prayed for consistently and supported in times of need.",
-      "New to CDMI, walking through a hard season, or looking for deeper connection? Care-rings is your home within the home."
+      "Care-rings are small groups across the church. Everyone is known by name, prayed for and supported when life gets hard.",
+      "New to CDMI or looking for real connection? Start here."
     ],
     programmes: [
-      ["Care-ring Sundays", "Sundays dedicated to community and mutual care: meeting one another, welcoming newcomers and checking in on those who have been absent."],
-      ["Care-ring Fellowships & Activities", "Small-group fellowships in homes, community spaces and church settings for worship, sharing, prayer and genuine friendship all year round."]
+      ["Care-ring Sundays", "Sundays for meeting new people, welcoming visitors and checking on those we have missed."],
+      ["Care-ring Fellowships", "Small groups in homes and around the city for worship, prayer and friendship."]
     ]
   }
 ];
