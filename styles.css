@@ -380,16 +380,33 @@ p { color: var(--muted); }
 .gatherings { background: var(--cream); color: var(--dark-text); border-radius: 40px 40px 0 0; margin-top: 40px; }
 .gatherings p { color: var(--dark-muted); }
 .gatherings .h2 em { color: var(--blue); }
-.gather-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.gcard { background: var(--paper); border-radius: var(--radius); padding: 30px 26px 34px; border: 1px solid rgba(13,22,48,.08); transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
-.gcard:hover { transform: translateY(-8px); box-shadow: 0 30px 60px -30px rgba(13,22,48,.35); }
-.gcard__icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue), var(--teal)); color: #fff; margin-bottom: 26px; }
-.gcard__icon svg { width: 26px; height: 26px; }
-.gcard__when { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--blue) !important; margin: 0 0 6px; }
-.gcard h3 { font-family: var(--display); font-size: 24px; letter-spacing: -0.02em; margin: 0 0 10px; line-height: 1.15; }
-.gcard p:last-child { margin: 0; font-size: 15px; }
-@media (max-width: 1040px) { .gather-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .gather-grid { grid-template-columns: 1fr; } }
+.gpanels { display: flex; gap: 14px; height: clamp(480px, 68vh, 640px); }
+.gpanel { position: relative; flex: 1 1 0; min-width: 0; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: var(--ink); color: #fff; transition: flex-grow 1s var(--ease), box-shadow .6s var(--ease); outline-offset: 4px; }
+.gpanel.is-active { flex-grow: 3.4; box-shadow: 0 40px 80px -40px rgba(6,13,34,.6); cursor: default; }
+.gpanel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); filter: grayscale(.6) brightness(.7); transition: transform 1.4s var(--ease), filter 1s var(--ease); }
+.gpanel.is-active img { transform: scale(1); filter: none; }
+.gpanel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,13,34,.35) 0%, rgba(6,13,34,0) 35%, rgba(6,13,34,.92) 100%); }
+.gpanel > * { z-index: 1; }
+.gpanel__num { position: absolute; top: 22px; left: 24px; font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--gold); line-height: 1; }
+.gpanel__label { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%) rotate(180deg); writing-mode: vertical-rl; white-space: nowrap; font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; transition: opacity .4s; }
+.gpanel.is-active .gpanel__label { opacity: 0; }
+.gpanel__body { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(24px, 3vw, 40px); max-width: 560px; opacity: 0; transform: translateY(24px); transition: opacity .4s, transform .8s var(--ease); pointer-events: none; }
+.gpanel.is-active .gpanel__body { opacity: 1; transform: none; transition-delay: .35s; pointer-events: auto; }
+.gatherings .gpanel__body p { color: rgba(255,255,255,.78); margin: 0; font-size: 17px; }
+.gatherings .gpanel__body .gpanel__when { color: var(--gold); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+.gpanel h3 { font-family: var(--display); font-size: clamp(32px, 3.6vw, 52px); letter-spacing: -0.035em; line-height: 1; margin: 0 0 14px; }
+.gpanel__link { display: inline-flex; gap: 8px; margin-top: 22px; color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 11px 20px; border-radius: 99px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(8px); transition: background .3s; }
+.gpanel__link:hover { background: rgba(255,255,255,.22); }
+.gpanel__link i { font-style: normal; transition: transform .5s var(--ease); }
+.gpanel__link:hover i { transform: translateX(4px); }
+@media (max-width: 760px) {
+  .gpanels { flex-direction: column; height: 760px; gap: 10px; }
+  .gpanel.is-active { flex-grow: 4.2; }
+  .gpanel__label { writing-mode: horizontal-tb; transform: translateY(-50%); left: 72px; top: 50%; bottom: auto; font-size: 20px; }
+  .gpanel__num { top: 50%; transform: translateY(-50%); }
+  .gpanel.is-active .gpanel__num { top: 22px; transform: none; }
+  .gpanel::after { background: linear-gradient(180deg, rgba(6,13,34,.45) 0%, rgba(6,13,34,.55) 40%, rgba(6,13,34,.92) 100%); }
+}
 
 /* ---------- Conference ---------- */
 .conference { position: relative; min-height: 115vh; display: grid; align-items: center; overflow: hidden; padding: 140px 0; background: #03081a; perspective: 1400px; }

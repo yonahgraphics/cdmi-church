@@ -339,6 +339,16 @@
     if (!drawer.hidden && e.key === "ArrowLeft") stepDrawer(-1);
   });
 
+  function gatherPanels() {
+    const panels = $$("#gpanels .gpanel");
+    const activate = (p) => panels.forEach((x) => { const on = x === p; x.classList.toggle("is-active", on); x.setAttribute("aria-expanded", on); });
+    panels.forEach((p) => {
+      p.addEventListener("click", () => activate(p));
+      p.addEventListener("focus", () => activate(p));
+      if (FINE_POINTER) p.addEventListener("mouseenter", () => activate(p));
+    });
+  }
+
   function eventHover() {
     if (!FINE_POINTER || REDUCED || !hasGsap) return;
     const float = $("#eventFloat"), img = $("img", float);
@@ -697,6 +707,7 @@
   /* ---------------- Boot ---------------- */
   renderDepartments();
   renderEvents();
+  gatherPanels();
   const heroCharsAll = $$(".hero__title [data-split]").flatMap(splitChars);
   buildTiles();
   let rt;
